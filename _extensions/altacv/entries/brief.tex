@@ -1,0 +1,16 @@
+$-- AltaCV has no dedicated single-line entry macro. \cvachievement (an icon,
+$-- a bold header and a line of description) gives the closest "one line, no
+$-- elaboration" shape brief calls for -- the same reasoning awesomecv's own
+$-- brief handler applies to \cvhonor. The icon is a field \cvachievement
+$-- expects but the conventional shape doesn't supply, so a fixed award medal
+$-- stands in for it: brief best suits awards and memberships. `where` is
+$-- preferred over `with` for the description, falling back to it, and `when`
+$-- is appended in parentheses when given.
+$for(entries)$
+\cvachievement
+  {\faAward}
+  {$entries.what$} % what
+  {$if(entries.where)$$entries.where$$else$$entries.with$$endif$$if(entries.when)$ ($entries.when$)$endif$}
+
+$sep$\divider
+$endfor$

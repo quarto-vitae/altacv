@@ -1,0 +1,14 @@
+$for(entries)$
+\cvevent
+  {$entries.what$} % what
+  {$entries.with$} % with
+  {$entries.when$} % when
+  {$entries.where$} % where
+$if(entries.why)$
+\begin{itemize}
+$for(entries.why)$\item $entries.why$
+$endfor$\end{itemize}
+$endif$
+
+$sep$\divider
+$endfor$

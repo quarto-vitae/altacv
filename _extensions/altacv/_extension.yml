@@ -1,0 +1,48 @@
+title: AltaCV
+author: Mitchell O'Hara-Wild
+version: 0.1.0
+quarto-required: ">=1.7.0"
+
+# AltaCV (https://github.com/liantze/AltaCV) by LianTze Lim: a two-colour,
+# icon-driven CV in two asymmetric columns, described upstream as the
+# most-starred LaTeX CV class on GitHub. Not on CTAN, so altacv.cls is
+# vendored here (unmodified, LPPL 1.3+) and reached through
+# `format-resources` rather than relied on to be already installed.
+contributes:
+  formats:
+    pdf:
+      # fontspec (loaded by the class itself under `\iftutex`) needs a Unicode
+      # engine; upstream's own sample.tex likewise builds with xelatex or
+      # lualatex.
+      pdf-engine: xelatex
+      template: altacv.tex
+      documentclass: altacv
+      papersize: a4
+      fontsize: 10pt
+      # The entries/ directory is deliberately absent here: resources are
+      # copied after pandoc runs, so a handler listed here would resolve only
+      # on a second render. The filter reads _extensions/**/entries/ directly.
+      format-resources:
+        - altacv.cls
+      # Default knitr engine printing data directly as a markdown table.
+      df-print: kable
+      # A CV is a document of listings; echoing the code that builds them is
+      # almost never wanted.
+      echo: false
+      filters:
+        # Provided by the embedded copy of quarto-vitae/curriculum, under
+        # _extensions/quarto-vitae/curriculum. Filters are matched by the
+        # embedded extension's directory name (its extension id), not by the
+        # Lua filter's filename -- so this must say "curriculum", matching
+        # quarto-vitae/curriculum's own directory name.
+        # Refresh with:
+        #   quarto update quarto-vitae/curriculum --embed altacv
+        - curriculum
+        # Maps `#` and `##` onto \cvsection and \cvsubsection, so altacv.cls
+        # can stay a near-verbatim copy of upstream.
+        - at: post-quarto
+          path: altacv.lua
+      # Style names this template implements, for the filter's fallback
+      # warning.
+      vitae:
+        styles: [detailed, brief, skills]

@@ -1,0 +1,139 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% AltaCV LaTeX Template for CV/Resume
+%
+% This template has been downloaded from:
+% https://github.com/liantze/AltaCV
+%
+% Author:
+% LianTze Lim <liantze@gmail.com>
+%
+% Adapted to be a Quarto template by Mitchell O'Hara-Wild
+%
+% Template license:
+% LPPL 1.3 or later (https://www.latex-project.org/lppl.txt)
+%
+% AltaCV's signature look is two asymmetric columns, and upstream leaves it to
+% the author to decide what goes in which. Rather than inventing a new
+% heading-attribute mechanism for that, this follows the precedent already set
+% by latexcv-sidebar: the ordinary Markdown body (headings and `.entries`
+% divs) fills the main (left) column, and a `sidebar:` front-matter list of
+% {title, items} sections fills the right one, rendered as a `\cvsection`
+% heading over a run of `\cvtag` pills -- the shape upstream's own sample
+% document uses for its "Strengths" section.
+%-------------------------------------------------------------------------------
+$passoptions.latex()$
+%
+% `withhyper` is always enabled: without it, altacv prints full URLs instead
+% of hyperlinks and issues a ClassWarning on every \printinfo call. Other
+% class options (`normalphoto`, `ragged2e`) remain reachable through
+% `classoption`, since neither conflicts with anything set here.
+\documentclass[
+$if(fontsize)$$fontsize$,$endif$
+$if(papersize)$$papersize$paper,$endif$
+withhyper$for(classoption)$,$classoption$$endfor$
+]{altacv}
+
+% Upstream's own default page geometry and column gap, overridable as in any
+% other Quarto pdf.
+\geometry{$if(geometry)$$for(geometry)$$geometry$$sep$,$endfor$$else$left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm$endif$}
+
+% Not loaded by the class itself -- upstream's own sample document loads it by
+% hand, and so does this template.
+\usepackage{paracol}
+
+%-------------------------------------------------------------------------------
+%	ACCENT COLOUR
+%
+%	AltaCV names its palette through `\colorlet` rather than taking a hex value
+%	directly, so `sectcol` (`headcolor` accepted as an alias, matching the
+%	other quarto-vitae templates) is threaded into every colourlet that upstream
+%	derives from its own `accent`. `name` is left untouched: upstream's own
+%	sample sets it to plain black regardless of the accent, and this follows
+%	that lead.
+%-------------------------------------------------------------------------------
+$if(sectcol)$
+\definecolor{sectcol}{HTML}{$sectcol$}
+$else$
+$if(headcolor)$
+\definecolor{sectcol}{HTML}{$headcolor$}
+$else$
+\colorlet{sectcol}{accent}
+$endif$
+$endif$
+\colorlet{accent}{sectcol}
+\colorlet{tagline}{sectcol}
+\colorlet{heading}{sectcol}
+\colorlet{headingrule}{sectcol}
+\colorlet{subheading}{sectcol}
+
+%-------------------------------------------------------------------------------
+%	PANDOC SUPPORT
+%-------------------------------------------------------------------------------
+% common.latex is required in every custom Quarto LaTeX template, and calls
+% pandoc.tex, which in turn brings in syntax highlighting, tables.tex,
+% graphics.tex, citations.tex, babel-lang.tex, tightlist.tex, biblio-config.tex
+% and header-includes. Do not hand-copy any of those: they are Pandoc's to
+% maintain, and a stale local copy silently drifts out of step with the reader.
+$common.latex()$
+$after-header-includes.latex()$
+
+% Deliberately not calling Quarto's own hypersetup partial here: the class
+% already configures hyperref itself once `withhyper` is set
+% (\hypersetup{hidelinks} and \urlstyle{same}, run at begindocument/before),
+% and running that partial as well would fire a second, later \hypersetup
+% that silently wins over any `colorlinks` a document sets -- upstream marks
+% links by icon, not colour, the same convention every other quarto-vitae
+% template follows.
+
+% Honours mainfont/sansfont/monofont and the fontfamily options, so the CV's
+% fonts are changed the same way as in any other Quarto pdf. fonts.latex is
+% NOT called: it would load lmodern over the top of whatever fontspec stack
+% the class or a chosen font sets up.
+$font-settings.latex()$
+
+\begin{document}
+
+$if(profilepic)$\photoR{$if(profilepic-width)$$profilepic-width$$else$2.8cm$endif$}{$profilepic$}$endif$
+
+\name{$name$$if(surname)$ $surname$$endif$}
+$if(position)$\tagline{$position$}$endif$
+
+\personalinfo{%
+$if(address)$\location{$address$}$endif$
+$if(phone)$\phone{$phone$}$endif$
+$if(email)$\email{$email$}$endif$
+$if(www)$\homepage{$www$}$endif$
+$if(github)$\github{$github$}$endif$
+$if(linkedin)$\linkedin{$linkedin$}$endif$
+$if(orcid)$\orcid{$orcid$}$endif$
+}
+
+\makecvheader
+
+%-------------------------------------------------------------------------------
+%	CV/RESUME CONTENT
+%-------------------------------------------------------------------------------
+\columnratio{$if(main-ratio)$$main-ratio$$else$0.6$endif$}
+
+\begin{paracol}{2}
+
+$body$
+
+%-------------------------------------------------------------------------------
+%	SIDEBAR COLUMN -- filled from `sidebar:` front matter, a list of sections
+%	each with a `title` and a list of `items`, rendered as pills.
+%-------------------------------------------------------------------------------
+\switchcolumn
+
+$for(sidebar)$
+\cvsection{$sidebar.title$}
+
+$for(sidebar.items)$\cvtag{$sidebar.items$}$sep$ $endfor$
+
+\medskip
+$endfor$
+
+\end{paracol}
+
+\end{document}

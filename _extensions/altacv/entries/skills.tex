@@ -1,0 +1,15 @@
+$-- AltaCV's own \cvskill expects a numeric 1-5 rating, not a category and its
+$-- members, so the conventional {what: category, with: members} shape does
+$-- not map onto it. \cvtag (a pill-style chip) is a much closer fit for a
+$-- list of members, so each entry becomes a subsection labelled `what`, with
+$-- one tag per member of `with` -- or `why`, if the author listed members
+$-- that way instead. A `with` given as one string (rather than a list) prints
+$-- as a single tag holding the whole string, the same way the other
+$-- quarto-vitae templates print an unsplit `with` as one piece of text.
+$for(entries)$
+\cvsubsection{$entries.what$}
+
+$if(entries.with)$\cvtag{$entries.with$}$else$$for(entries.why)$\cvtag{$entries.why$}$sep$ $endfor$$endif$
+
+\smallskip
+$endfor$

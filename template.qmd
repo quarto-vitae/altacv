@@ -1,0 +1,109 @@
+---
+name: Marie
+surname: Curie
+position: "Physicist and Chemist"
+address: "Paris, France"
+email: "marie.curie@example.org"
+github: mcurie
+# Every quarto-vitae template places a profile picture the same way; a square
+# image crops best -- AltaCV crops it to a circle unless `normalphoto` is
+# given as a classoption.
+# profilepic: "profile.jpg"
+# Uncomment to add more to the header:
+# phone: "+33 1 23 45 67 89"
+# www: "example.org"
+# linkedin: mcurie
+# orcid: 0000-0000-0000-0000
+# The accent colour every quarto-vitae template builds its headings from.
+# `headcolor` is accepted as an alias.
+# sectcol: "8F0D0D"
+format: altacv-pdf
+# The right-hand column is filled from here; the main column is everything
+# below written as ordinary headings and `.entries` divs. See `sidebar:` in
+# creating-templates.qmd-style templates such as latexcv-sidebar for the same
+# idea applied to a different design.
+sidebar:
+  - title: Techniques
+    items:
+      - Fractional crystallisation
+      - Quartz electrometry
+      - Radiometric measurement
+  - title: Languages
+    items:
+      - Polish
+      - French
+      - Russian
+---
+
+# Education
+
+Each row is one entry, each column a field. `fields` renames a column the
+style does not expect, like `dplyr::rename()`.
+
+::: {.entries style="detailed" fields="{what: Degree, with: Institution, when: Years, where: Location}"}
+| Degree             | Institution         | Years     | Location      |
+|--------------------|---------------------|-----------|---------------|
+| Ph.D. in Physics   | University of Paris | 1891-1895 | Paris, France |
+| M.Sc. in Chemistry | University of Paris | 1889-1891 | Paris, France |
+:::
+
+# Employment
+
+A grid table can hold a bullet list in a cell, so `why` carries several points
+per entry. Here the headings already match, and no `fields` is needed.
+
+::: {.entries style="detailed"}
++------------+---------------------+-----------+------------------------------+
+| what       | with                | when      | why                          |
++============+=====================+===========+==============================+
+| Professor  | University of Paris | 1906-1934 | - First woman to hold the    |
+|            |                     |           |   chair of General Physics   |
+|            |                     |           | - Directed the Curie         |
+|            |                     |           |   Laboratory                 |
++------------+---------------------+-----------+------------------------------+
+| Researcher | EPCI                | 1897-1906 | - Isolated polonium and      |
+|            |                     |           |   radium                     |
++------------+---------------------+-----------+------------------------------+
+:::
+
+# Awards
+
+The `brief` style is a single line per entry, for lists needing no
+elaboration.
+
+::: {.entries style="brief"}
+| what                     | where           | when |
+|--------------------------|-----------------|------|
+| Nobel Prize in Chemistry | Swedish Academy | 1911 |
+| Davy Medal               | Royal Society   | 1903 |
+| Nobel Prize in Physics   | Swedish Academy | 1903 |
+:::
+
+# Service
+
+Markdown inside cells is preserved and LaTeX special characters are escaped,
+so *emphasis* and a literal 100% both come out right.
+
+::: {.entries style="brief"}
+| what                                 | where    | when |
+|--------------------------------------|----------|------|
+| Member, *Solvay Council*             | Brussels | 1911 |
+| Director, Red Cross Radiology (100%) | Paris    | 1914 |
+:::
+
+# Fields of Research
+
+The `skills` style pairs a category with its members, rendered here as a
+labelled group of tags. Each member is its own tag when `why` is a bulleted
+list, or one tag holding the whole line when `with` is a single string.
+
+::: {.entries style="skills"}
++----------------+-----------------------------+
+| what           | why                         |
++================+=============================+
+| Radiochemistry | - Fractional crystallisation|
+|                | - Isolation of radium       |
++----------------+-----------------------------+
+| Electrometry   | - Piezoelectric quartz      |
++----------------+-----------------------------+
+:::
