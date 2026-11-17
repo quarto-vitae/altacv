@@ -2,9 +2,8 @@
   Render Markdown headings as AltaCV section headings.
 
   AltaCV names its heading commands \cvsection and \cvsubsection, leaving
-  LaTeX's own \section alone (unlike moderncv, which reuses \section
-  directly). Bridging that here rather than by redefining \section in
-  altacv.cls keeps the class a near-verbatim copy of upstream.
+  LaTeX's own \section alone. Bridging that here rather than by redefining
+  \section in altacv.cls keeps the class a near-verbatim copy of upstream.
 
   Only levels 1 and 2 are remapped, because those are the only two the class
   styles. Level 3 and below fall through to extarticle's own \subsubsection.

@@ -10,8 +10,8 @@ LianTze Lim. That file remains under the terms it already carries:
 > <http://www.latex-project.org/lppl.txt>. This work has the LPPL maintenance
 > status 'maintained'. The Current Maintainer of this work is LianTze Lim.
 
-Everything else here — the Quarto template (`altacv.tex`), the entry listing
-handlers, the heading filter, and this documentation — is original work,
+Everything else here, the Quarto template (`altacv.tex`), the entry listing
+handlers, the heading filter, and this documentation, is original work,
 adapted to be a Quarto template by Mitchell O'Hara-Wild, and is released
 under the Creative Commons Attribution-ShareAlike 4.0 International License
 (CC BY-SA 4.0).
@@ -22,15 +22,15 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 You are free to:
 
-- **Share** — copy and redistribute the material in any medium or format
-- **Adapt** — remix, transform, and build upon the material for any purpose,
+- **Share**: copy and redistribute the material in any medium or format
+- **Adapt**: remix, transform, and build upon the material for any purpose,
   even commercially
 
 Under the following terms:
 
-- **Attribution** — You must give appropriate credit, provide a link to the
+- **Attribution**: You must give appropriate credit, provide a link to the
   licence, and indicate if changes were made.
-- **ShareAlike** — If you remix, transform, or build upon the material, you
+- **ShareAlike**: If you remix, transform, or build upon the material, you
   must distribute your contributions under the same licence as the original.
 
 Copyright (c) Mitchell O'Hara-Wild
