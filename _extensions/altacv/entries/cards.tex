@@ -1,0 +1,9 @@
+$-- \cvref draws a reference card: a bold name over two icon-marked lines.
+$-- `with` is the closer fit for the first line (an "@" icon suits an email
+$-- address) and `why` for the second (an envelope icon suits a mailing
+$-- address) -- the shape upstream's own sample gives its "Referees" section.
+$for(entries)$
+\cvref{$entries.what$}{$entries.with$}{$entries.why$}
+
+$sep$\divider
+$endfor$

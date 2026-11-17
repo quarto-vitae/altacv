@@ -1,0 +1,5 @@
+$-- `skills` groups members under a `what` heading via \cvsubsection; badges
+$-- skips the heading and prints one flat run of \cvtag pills, one per
+$-- entry's `what` -- the shape upstream's own sample gives its "Strengths"
+$-- section.
+$for(entries)$\cvtag{$entries.what$}$sep$ $endfor$

@@ -45,4 +45,4 @@ contributes:
       # Style names this template implements, for the filter's fallback
       # warning.
       vitae:
-        styles: [detailed, brief, skills]
+        styles: [detailed, brief, skills, badges, cards]
