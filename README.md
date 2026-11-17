@@ -35,9 +35,10 @@ Set the format and describe yourself in the YAML header:
 name: Marie
 surname: Curie
 position: "Physicist and Chemist"
-address: "Paris, France"
-email: "marie.curie@example.org"
-github: mcurie
+social:
+  - address: "Paris, France"
+  - email: "marie.curie@example.org"
+  - github: mcurie
 format: altacv-pdf
 ---
 ```
@@ -82,16 +83,14 @@ education |> filter(completed)
 ````
 
 Entries can also come from a CSV printed by a cell, from several tables in one
-div, or carry bullet lists written in grid table cells. Those are covered in
-the [vitae documentation](https://quarto-vitae.github.io/).
+div, or carry bullet lists written in grid table cells.
 
 ## The two columns
 
 Upstream leaves it to the author to decide what goes in which of AltaCV's two
-columns. This template settles that the same way the `sidebar` designs in
-[latexcv](https://github.com/quarto-vitae/latexcv) do: the ordinary body of
-the document — headings and `.entries` divs — fills the main (left) column,
-and a `sidebar:` list in the front matter fills the side (right) one:
+columns. This template settles that by having the ordinary body of the
+document, headings and `.entries` divs, fill the main (left) column, and a
+`sidebar:` list in the front matter fill the side (right) one:
 
 ```yaml
 sidebar:
@@ -111,8 +110,7 @@ Each section becomes a heading over a run of pill-shaped tags, one per item.
 
 ## Styles
 
-This format implements the three conventional vitae listing styles, mapped
-onto AltaCV's own macros.
+This format maps five listing styles onto AltaCV's own macros.
 
 `detailed`
 : One `\cvevent`, using `what`, `with`, `when` and `where`, with a bulleted
@@ -126,9 +124,19 @@ onto AltaCV's own macros.
 
 `skills`
 : A category in `what`, with its members in `with` (or `why`, if given as a
-  list) rendered as pill tags underneath — AltaCV's own `\cvskill` expects a
-  numeric 1–5 rating rather than a list of members, so tags are the closer
+  list) rendered as pill tags underneath. AltaCV's own `\cvskill` expects a
+  numeric 1-5 rating rather than a list of members, so tags are the closer
   fit for the conventional shape.
+
+`badges`
+: One `\cvtag` pill per entry, from `what`, printed as a flat run with no
+  grouping heading. Suits a plain list of strengths or keywords -- the shape
+  upstream's own sample uses for its "Strengths" section.
+
+`cards`
+: One `\cvref` reference card per entry: `what` as a bold name, `with` on a
+  line marked by an "@" icon, and `why` on a line marked by an envelope
+  icon. Suits a list of referees.
 
 ## Format options
 
@@ -140,9 +148,7 @@ Set these in the YAML header. All are optional except `name`.
 |--------|--------|
 | `name`, `surname` | The name shown in the header |
 | `position` | The tagline under the name |
-| `address` | Shown as the location in the personal info line |
-| `phone`, `email`, `www` | Contact details |
-| `github`, `linkedin`, `orcid` | Profile links |
+| `social` | Contact details as a list of `service: handle` items, shown in the order written. Services include `address`, `phone`, `email`, `website`, `github`, `linkedin`, `orcid`, `mastodon` and more, and `custom` takes an `icon` and `text`. Shared by every quarto-vitae template. |
 | `profilepic` | Path to a profile image, cropped to a circle unless `normalphoto` is set as a `classoption` |
 | `profilepic-width` | Diameter of the profile image, defaulting to `2.8cm` |
 
@@ -177,13 +183,3 @@ This template redistributes AltaCV's own `altacv.cls`, unmodified, under its
 existing LPPL 1.3+ licence. Everything else here is released under CC BY-SA
 4.0, see [LICENSE](LICENSE.md). Built on
 [AltaCV](https://github.com/liantze/AltaCV) by LianTze Lim.
-
----
-
-> [!TIP]
-> **This is one of several vitae templates for Quarto.**
->
-> They share the same entry syntax, so a CV written here can be rendered with
-> a different design by changing the `format:` line. To browse the other
-> templates, read the full guide to writing a CV, or build a template of your
-> own, visit <https://quarto-vitae.github.io/>.

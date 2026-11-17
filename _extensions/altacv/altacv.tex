@@ -14,13 +14,12 @@
 % LPPL 1.3 or later (https://www.latex-project.org/lppl.txt)
 %
 % AltaCV's signature look is two asymmetric columns, and upstream leaves it to
-% the author to decide what goes in which. Rather than inventing a new
-% heading-attribute mechanism for that, this follows the precedent already set
-% by latexcv-sidebar: the ordinary Markdown body (headings and `.entries`
-% divs) fills the main (left) column, and a `sidebar:` front-matter list of
-% {title, items} sections fills the right one, rendered as a `\cvsection`
-% heading over a run of `\cvtag` pills -- the shape upstream's own sample
-% document uses for its "Strengths" section.
+% the author to decide what goes in which. This template settles that by
+% having the ordinary Markdown body (headings and `.entries` divs) fill the
+% main (left) column, and a `sidebar:` front-matter list of {title, items}
+% sections fill the right one, rendered as a `\cvsection` heading over a run
+% of `\cvtag` pills -- the shape upstream's own sample document uses for its
+% "Strengths" section.
 %-------------------------------------------------------------------------------
 $passoptions.latex()$
 %
@@ -46,11 +45,10 @@ withhyper$for(classoption)$,$classoption$$endfor$
 %	ACCENT COLOUR
 %
 %	AltaCV names its palette through `\colorlet` rather than taking a hex value
-%	directly, so `sectcol` (`headcolor` accepted as an alias, matching the
-%	other quarto-vitae templates) is threaded into every colourlet that upstream
-%	derives from its own `accent`. `name` is left untouched: upstream's own
-%	sample sets it to plain black regardless of the accent, and this follows
-%	that lead.
+%	directly, so `sectcol` (`headcolor` accepted as an alias) is threaded into
+%	every colourlet that upstream derives from its own `accent`. `name` is left
+%	untouched: upstream's own sample sets it to plain black regardless of the
+%	accent, and this follows that lead.
 %-------------------------------------------------------------------------------
 $if(sectcol)$
 \definecolor{sectcol}{HTML}{$sectcol$}
@@ -83,8 +81,7 @@ $after-header-includes.latex()$
 % (\hypersetup{hidelinks} and \urlstyle{same}, run at begindocument/before),
 % and running that partial as well would fire a second, later \hypersetup
 % that silently wins over any `colorlinks` a document sets -- upstream marks
-% links by icon, not colour, the same convention every other quarto-vitae
-% template follows.
+% links by icon, not colour.
 
 % Honours mainfont/sansfont/monofont and the fontfamily options, so the CV's
 % fonts are changed the same way as in any other Quarto pdf. fonts.latex is
@@ -100,13 +97,21 @@ $if(profilepic)$\photoR{$if(profilepic-width)$$profilepic-width$$else$2.8cm$endi
 $if(position)$\tagline{$position$}$endif$
 
 \personalinfo{%
-$if(address)$\location{$address$}$endif$
-$if(phone)$\phone{$phone$}$endif$
-$if(email)$\email{$email$}$endif$
-$if(www)$\homepage{$www$}$endif$
-$if(github)$\github{$github$}$endif$
-$if(linkedin)$\linkedin{$linkedin$}$endif$
-$if(orcid)$\orcid{$orcid$}$endif$
+$for(social)$
+$if(social.is.address)$
+\printinfo[$social.title$]{\cvLocationMarker}{$social.label$}%
+$elseif(social.is.x)$
+\printinfo[$social.title$]{\faTwitter}{$social.label$}$if(social.url)$[$social.url$]$endif$%
+$elseif(social.is.googlescholar)$
+\printinfo[$social.title$]{\faGraduationCap}{$social.label$}$if(social.url)$[$social.url$]$endif$%
+$elseif(social.is.email)$
+\printinfo[$social.title$]{\faAt}{$social.label$}$if(social.url)$[$social.url$]$endif$%
+$elseif(social.is.custom)$
+\printinfo[$if(social.title)$$social.title$$else$$social.icon$$endif$]{\faIcon{$social.icon$}}{$social.label$}$if(social.url)$[$social.url$]$endif$%
+$else$
+\printinfo[$social.title$]{\faIcon{$social.icon$}}{$social.label$}$if(social.url)$[$social.url$]$endif$%
+$endif$
+$endfor$
 }
 
 \makecvheader

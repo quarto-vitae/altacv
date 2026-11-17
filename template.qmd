@@ -2,26 +2,24 @@
 name: Marie
 surname: Curie
 position: "Physicist and Chemist"
-address: "Paris, France"
-email: "marie.curie@example.org"
-github: mcurie
-# Every quarto-vitae template places a profile picture the same way; a square
-# image crops best -- AltaCV crops it to a circle unless `normalphoto` is
-# given as a classoption.
+# Contact details are listed by service, in the order they are shown.
+social:
+  - address: "Paris, France"
+  - email: "marie.curie@example.org"
+  - github: mcurie
+  - linkedin: mcurie
+  - orcid: 0000-0000-0000-0000
+  # - phone: "+33 1 23 45 67 89"
+  # - website: example.org
+# A square image crops best -- AltaCV crops it to a circle unless
+# `normalphoto` is given as a classoption.
 # profilepic: "profile.jpg"
-# Uncomment to add more to the header:
-# phone: "+33 1 23 45 67 89"
-# www: "example.org"
-# linkedin: mcurie
-# orcid: 0000-0000-0000-0000
-# The accent colour every quarto-vitae template builds its headings from.
-# `headcolor` is accepted as an alias.
+# The accent colour headings are built from. `headcolor` is accepted as an
+# alias.
 # sectcol: "8F0D0D"
 format: altacv-pdf
 # The right-hand column is filled from here; the main column is everything
-# below written as ordinary headings and `.entries` divs. See `sidebar:` in
-# creating-templates.qmd-style templates such as latexcv-sidebar for the same
-# idea applied to a different design.
+# below written as ordinary headings and `.entries` divs.
 sidebar:
   - title: Techniques
     items:
@@ -106,4 +104,31 @@ list, or one tag holding the whole line when `with` is a single string.
 +----------------+-----------------------------+
 | Electrometry   | - Piezoelectric quartz      |
 +----------------+-----------------------------+
+:::
+
+# Strengths
+
+The `badges` style prints one pill per entry from `what`, with no grouping
+heading above them -- unlike `skills`, which labels a run of tags with a
+category.
+
+::: {.entries style="badges"}
+| what                        |
+|------------------------------|
+| Meticulous experimentalist  |
+| Methodical                  |
+| Tenacious                   |
+:::
+
+# Referees
+
+The `cards` style draws a reference card per entry: `what` as a bold name,
+`with` on a line marked by an "@" icon, and `why` on a line marked by an
+envelope icon.
+
+::: {.entries style="cards"}
+| what                  | with                        | why                                          |
+|-----------------------|------------------------------|-----------------------------------------------|
+| Prof. Henri Becquerel | h.becquerel@sorbonne.fr     | Muséum national d'Histoire naturelle, Paris  |
+| Prof. André Debierne  | a.debierne@sorbonne.fr      | Institut du Radium, Paris                    |
 :::
